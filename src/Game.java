@@ -47,14 +47,14 @@ public class Game {
                 int neighbors = getCellNeighbors(i, j);
                 if (getCellStatus(i, j)) {
                     if (neighbors < 2 || neighbors > 3) {
-                        System.out.println("die: (" + i + "," + j + ") = " + neighbors);
+//                        System.out.println("die: (" + i + "," + j + ") = " + neighbors);
                         setCellChanged(i, j, true);
                     } else {
-                        System.out.println("still alive: (" + i + "," + j + ") = " + neighbors);
+//                        System.out.println("still alive: (" + i + "," + j + ") = " + neighbors);
                     }
                 } else {
                     if (neighbors == 3) {
-                        System.out.println("born: (" + i + "," + j + ") = " + neighbors);
+//                        System.out.println("born: (" + i + "," + j + ") = " + neighbors);
                         setCellChanged(i, j, true);
                     }
                 }
