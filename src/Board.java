@@ -12,39 +12,26 @@ public class Board {
         }
     }
 
+    public Cell[][] getCellGrid() {
+        return cellGrid;
+    }
+
     public int computeNeighbors(int posX, int posY) {
         int neighbors = 0;
         if (posX != 0 && posY != 0 && posX != cellGridSize - 1 && posY != cellGridSize - 1) {
-            neighbors += cellGrid[posX-1][posY-1].getStatusInInt();
-            neighbors += cellGrid[posX][posY-1].getStatusInInt();
-            neighbors += cellGrid[posX+1][posY-1].getStatusInInt();
-            neighbors += cellGrid[posX-1][posY].getStatusInInt();
-            neighbors += cellGrid[posX+1][posY].getStatusInInt();
-            neighbors += cellGrid[posX-1][posY+1].getStatusInInt();
-            neighbors += cellGrid[posX][posY+1].getStatusInInt();
-            neighbors += cellGrid[posX+1][posY+1].getStatusInInt();
+            neighbors += convertStatusToInt(posX - 1, posY - 1);
+            neighbors += convertStatusToInt(posX, posY - 1);
+            neighbors += convertStatusToInt(posX + 1, posY - 1);
+            neighbors += convertStatusToInt(posX - 1, posY);
+            neighbors += convertStatusToInt(posX + 1, posY);
+            neighbors += convertStatusToInt(posX - 1, posY + 1);
+            neighbors += convertStatusToInt(posX, posY + 1);
+            neighbors += convertStatusToInt(posX + 1, posY + 1);
         }
         return neighbors;
     }
 
-    public boolean getCellStatus(int posX, int posY) {
-        return cellGrid[posX][posY].getStatus();
-    }
-
-    public boolean getCellChange(int posX, int posY) {
-        return cellGrid[posX][posY].getChanged();
-    }
-
-    public void setCellChanged(int posX, int posY, boolean isChanged) {
-        cellGrid[posX][posY].setChange(isChanged);
-    }
-
-    public void switchStatus(int posX, int posY) {
-        Cell cell = cellGrid[posX][posY];
-        if (cell.getStatus()) {
-            cell.setStatus(false);
-        } else {
-            cell.setStatus(true);
-        }
+    public int convertStatusToInt(int posX, int posY) {
+        return (cellGrid[posX][posY].getStatus()) ? 1 : 0;
     }
 }

@@ -15,17 +15,11 @@ public class Cell {
         this.status = status;
     }
 
-    public int getStatusInInt() {
-        if (status) {
-            return 1;
-        } else return 0;
+    public boolean getChanged() {
+        return this.isChanged;
     }
 
     public void setChange(boolean isChanged) {
         this.isChanged = isChanged;
-    }
-
-    public boolean getChanged() {
-        return this.isChanged;
     }
 }
