@@ -15,8 +15,14 @@ public class CellTest extends TestCase {
         assertEquals(false, false);
     }
 
-    public void testSetCellStatus() {
+    public void testSetCellStatusTrue() {
         cell.setStatus(true);
         assertTrue(cell.getStatus());
+    }
+
+    public void testSetCellStatusFalse() {
+        cell.setStatus(false);
+        assertFalse(cell.getStatus());
+
     }
 }

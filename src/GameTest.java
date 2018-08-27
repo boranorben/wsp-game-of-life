@@ -58,4 +58,17 @@ public class GameTest extends TestCase {
         assertEquals(2, game.getCellNeighbors(3,2));
     }
 
+    public void testDeadCellHasNoNeighbors() {
+        game.switchCellStatus(1,1);
+        game.switchCellStatus(1,2);
+        game.switchCellStatus(1,3);
+        assertEquals(2, game.getCellNeighbors(2,1));
+        assertEquals(2, game.getCellNeighbors(2,3));
+        assertEquals(0, game.getCellNeighbors(3,3));
+        game.gameLogic();
+        assertFalse(game.getCellStatus(1,1));
+        assertTrue(game.getCellStatus(1,2));
+        assertFalse(game.getCellStatus(1,3));
+        assertFalse(game.getCellStatus(3,3));
+    }
 }

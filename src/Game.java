@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
@@ -41,20 +42,28 @@ public class Game {
         return getBoard().getCellGrid()[posX][posY].getChanged();
     }
 
+    public void randomInitialCell() {
+        Random random = new Random();
+        for (int i = 0; i < boardSize; i++) {
+            for (int j = 0; j < boardSize; j++) {
+                int rand = random.nextInt(boardSize + 1) + 1;
+                if (j == rand) {
+                    switchCellStatus(i,j);
+                }
+            }
+        }
+    }
+
     public void gameLogic() {
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
                 int neighbors = getCellNeighbors(i, j);
                 if (getCellStatus(i, j)) {
                     if (neighbors < 2 || neighbors > 3) {
-//                        System.out.println("die: (" + i + "," + j + ") = " + neighbors);
                         setCellChanged(i, j, true);
-                    } else {
-//                        System.out.println("still alive: (" + i + "," + j + ") = " + neighbors);
                     }
                 } else {
                     if (neighbors == 3) {
-//                        System.out.println("born: (" + i + "," + j + ") = " + neighbors);
                         setCellChanged(i, j, true);
                     }
                 }
@@ -68,64 +77,16 @@ public class Game {
                 }
             }
         }
-
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Game game = new Game(17);
-        game.switchCellStatus(4, 2);
-        game.switchCellStatus(5, 2);
-        game.switchCellStatus(6, 2);
-        game.switchCellStatus(10, 2);
-        game.switchCellStatus(11, 2);
-        game.switchCellStatus(12, 2);
-        game.switchCellStatus(2, 4);
-        game.switchCellStatus(2, 5);
-        game.switchCellStatus(2, 6);
-        game.switchCellStatus(7, 4);
-        game.switchCellStatus(7, 5);
-        game.switchCellStatus(7, 6);
-        game.switchCellStatus(9, 4);
-        game.switchCellStatus(9, 5);
-        game.switchCellStatus(9, 6);
-        game.switchCellStatus(14, 4);
-        game.switchCellStatus(14, 5);
-        game.switchCellStatus(14, 6);
-        game.switchCellStatus(4, 7);
-        game.switchCellStatus(5, 7);
-        game.switchCellStatus(6, 7);
-        game.switchCellStatus(10, 7);
-        game.switchCellStatus(11, 7);
-        game.switchCellStatus(12, 7);
-        game.switchCellStatus(4, 9);
-        game.switchCellStatus(5, 9);
-        game.switchCellStatus(6, 9);
-        game.switchCellStatus(10, 9);
-        game.switchCellStatus(11, 9);
-        game.switchCellStatus(12, 9);
-        game.switchCellStatus(2, 10);
-        game.switchCellStatus(2, 11);
-        game.switchCellStatus(2, 12);
-        game.switchCellStatus(7, 10);
-        game.switchCellStatus(7, 11);
-        game.switchCellStatus(7, 12);
-        game.switchCellStatus(9, 10);
-        game.switchCellStatus(9, 11);
-        game.switchCellStatus(9, 12);
-        game.switchCellStatus(14, 10);
-        game.switchCellStatus(14, 11);
-        game.switchCellStatus(14, 12);
-        game.switchCellStatus(4, 14);
-        game.switchCellStatus(5, 14);
-        game.switchCellStatus(6, 14);
-        game.switchCellStatus(10, 14);
-        game.switchCellStatus(11, 14);
-        game.switchCellStatus(12, 14);
-        for (int s = 0; s < 3; s++) {
-            for (int i = 0; i < 17; i++) {
+        Game game = new Game(10);
+        game.randomInitialCell();
+        for (int s = 0; s < 5; s++) {
+            for (int i = 0; i < 10; i++) {
                 System.out.println();
-                for (int j = 0; j < 17; j++) {
+                for (int j = 0; j < 10; j++) {
                     if (game.getCellStatus(i, j)) {
                         System.out.print("x ");
                     } else {
@@ -133,8 +94,8 @@ public class Game {
                     }
                 }
             }
-            scanner.nextLine();
             game.gameLogic();
+            scanner.nextLine();
         }
     }
 }
